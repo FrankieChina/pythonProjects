@@ -1,6 +1,7 @@
 import random
+import sys
 
-def select_random_lines(file_path, num_lines=100, output_file="selected_lines.txt"):
+def select_random_lines(file_path, num_lines=100, output_file="random_nf.txt"):
     try:
         with open(file_path, 'r') as file:
             lines = file.readlines()
@@ -11,11 +12,15 @@ def select_random_lines(file_path, num_lines=100, output_file="selected_lines.tx
     except FileNotFoundError:
         return None
 
-# Example usage: replace "your_file.txt" with the actual file path
-file_path = "analysis.txt"
-output_file = select_random_lines(file_path)
+if __name__ == "__main__":
+    if len(sys.argv) != 2:
+        print("Usage: python random_line_selector.py <input_file>")
+        sys.exit(1)
 
-if output_file:
-    print(f"Selected lines written to {output_file}")
-else:
-    print(f"File '{file_path}' not found.")
+    input_file = sys.argv[1]
+    output_file = select_random_lines(input_file)
+
+    if output_file:
+        print(f"Selected lines written to {output_file}")
+    else:
+        print(f"File '{input_file}' not found.")
