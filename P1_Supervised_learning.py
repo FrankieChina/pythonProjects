@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 from sklearn.impute import SimpleImputer
 from sklearn.linear_model import LogisticRegression, LinearRegression
-from sklearn.metrics import confusion_matrix, classification_report
+from sklearn.metrics import confusion_matrix, classification_report, mean_squared_error
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split, KFold, cross_val_score
@@ -13,7 +13,7 @@ df = pd.read_csv("tumor_data_d.csv")
 def duplicates():
 #handle duplicates
     print("****************************************\n\n")
-    print("print duplicates\n\n")
+    print("Print duplicates\n\n")
     duplicates=df.duplicated()
 
     print(duplicates)
@@ -99,15 +99,31 @@ def Imputation_and_Regression_models():
 
 
     #Scale Data
-    print("STANDARDIZING DATA...")
+    print("STANDARDIZING DATA...\n")
     scaler =StandardScaler()
     X_train_scaled=scaler.fit_transform(X_train_num)
     X_test_scaled=scaler.transform(X_test_num)
 
-    #Evaluating classification models
+    #Evaluating regression model
     kf=KFold(n_splits=5,shuffle=True,random_state=69)
     reg=LinearRegression()
     cv_results=cross_val_score(reg,X_train_scaled,y_train,cv=kf)
+    print("CV Results:")
+    print(cv_results)
+
+    #fit training to model
+    print("\n")
+    reg.fit(X_train_scaled,y_train)
+    y_pred=reg.predict(X_test_scaled)
+    meanSE = mean_squared_error(y_test,y_pred, squared=False)
+
+    r_2=reg.score(X_test_scaled,y_test)
+    print("R-Squared:")
+    print(r_2)
+    print("\nMean Squared Error:")
+    print(meanSE)
+
+
 
 
 
@@ -122,7 +138,7 @@ print("****************************************\n\n")
 df.info()
 print(df)
 print("****************************************\n\n")
-print("find number of missing values \n")
+print("Find the number of missing values \n")
 print(df.isna().sum().sort_values())
 print("****************************************\n\n")
 duplicates()
