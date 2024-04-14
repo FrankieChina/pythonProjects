@@ -129,7 +129,7 @@ def Imputation_and_Regression_models():
 
 
 
-print("Frankie China Quintero")
+print("Frankie China Quintero, Jaspreet Singh, Tiffany Kawamura")
 print("ACO423")
 print("Module Phase 1 Supervised Learning")
 print("****************************************\n\n")
