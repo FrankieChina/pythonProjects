@@ -17,7 +17,6 @@ targets = [host_idx_dict[host] for host in netflow_ip_data["DstIPaddress"].to_li
 pkt_values =  netflow_ip_data["Pkts"].to_list()[0:num_hosts]
 bytes_values =  netflow_ip_data["Octets"].to_list()[0:num_hosts]
 
-.
 
 fig = go.Figure(data=[go.Sankey(
     node = dict(
