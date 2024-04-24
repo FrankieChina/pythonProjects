@@ -4,11 +4,11 @@ import pandas as pd
 netflow_data  = pd.read_csv("random_nf.csv")
 req_cols = ["SrcIPaddress", "DstIPaddress", "SrcP", "DstP", "P", "Pkts", "Octets"]
 
-netflow_ip_data = netflow_data[req_cols].groupby(["SrcIPaddress", "DstIPaddress","SrcP","DstP"]).sum().reset_index()
+netflow_ip_data = netflow_data[req_cols].groupby(["SrcIPaddress", "DstIPaddress","P","DstP"]).sum().reset_index()
 netflow_ip_data = netflow_ip_data.sample(frac=1, random_state=0)
 # netflow_ip_data = netflow_ip_data.nlargest(100, columns=["dpkts"])
 
-hosts = list(set(netflow_ip_data["SrcIPaddress"].to_list() + netflow_ip_data["DstIPaddress"].to_list()+netflow_ip_data["SrcP"].to_list()+netflow_ip_data["DstP"].to_list()))
+hosts = list(set(netflow_ip_data["SrcIPaddress"].to_list() + netflow_ip_data["DstIPaddress"].to_list()+netflow_ip_data["P"].to_list()+netflow_ip_data["DstP"].to_list()))
 host_idx_dict = {host: idx for idx,host in enumerate(hosts)}
 
 num_hosts = 30
