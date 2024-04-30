@@ -15,9 +15,7 @@ df.info()
 def standardize_features():
     print("STANDARDIZING...")
     scaler = StandardScaler()
-    scaler.fit(df)
-    StandardScaler(copy=True, with_mean=True, with_std=True)
-    X_scaled = scaler.transform(df)
+    X_scaled = scaler.fit_transform(df)
     return X_scaled
 
 #2- Create 10 KMeans models on the scaled data with Ks (number of clusters) 
