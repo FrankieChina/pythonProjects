@@ -5,8 +5,8 @@ from sklearn.cluster import KMeans
 from sklearn.decomposition import PCA
 from sklearn.pipeline import make_pipeline
 
-#0- Preprocessing of Data
-print("PREPROCESSING...")
+#0- Exploring Data
+print("EXPLORING...")
 df = pd.read_csv("DiabetesData2.csv")
 print(df.head())
 df.info()
